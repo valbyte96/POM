@@ -68,7 +68,7 @@ public class Game1View extends View {
         mPaint = new Paint();
         you = new You(width/2, height-7*unit);
         fortress1 = new Fortress(width/2 + 2*unit,height/2);
-        fortress2 = new Fortress(width/2 - 2*unit,height/2);
+        fortress2 = new Fortress(width/2 - 4*unit,height/2);
         hitList[0] = fortress1;
         hitList[1] = fortress2;
 

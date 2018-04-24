@@ -41,7 +41,7 @@ public class Bullet {
 
     public void draw(Canvas canvas, Paint paint){
         paint.setColor(this.color);
-        canvas.drawRect(x+unit+2*unit/3,y,x+2*unit-2*unit/3,y+unit/2,paint);
+        canvas.drawRect(x-unit/4,y,x+unit/4,y+unit/2,paint);
 
     }
 

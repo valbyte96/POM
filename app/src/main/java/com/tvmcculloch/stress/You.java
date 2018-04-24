@@ -47,8 +47,8 @@ public class You {
 
     public void draw(Canvas canvas, Paint paint){
         paint.setColor(this.color);
-        canvas.drawRect(x,y,x+unit*3,y+unit,paint);
-        canvas.drawRect(x+unit, y, x+unit*2, y-unit/2, paint);
+        canvas.drawRect(x+unit*3/2,y,x-unit*3/2,y+unit,paint);
+        canvas.drawRect(x-unit/2, y, x+unit/2, y-unit/2, paint);
 
     }
     public float getX(){
@@ -56,12 +56,6 @@ public class You {
     }
     public float getY(){
         return this.y;
-    }
-    public void shoot(){
-        Bullet b = new Bullet(this.x, this.y);
-        //b.fire();
-
-        // shoot a bullet
     }
 
 
