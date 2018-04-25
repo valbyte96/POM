@@ -34,6 +34,10 @@ public class Game1View extends View {
     public static long startTime;
     public static boolean move = false;
     public static Fortress[] hitList = new Fortress[2]; // stores fortresses
+    public static Enemy[] row1 = new Enemy[4];
+    public static Enemy e1;
+    public static Enemy e2;
+    public static Enemy e3;
 
 
 
@@ -71,6 +75,12 @@ public class Game1View extends View {
         fortress2 = new Fortress(width/2 - 4*unit,height/2);
         hitList[0] = fortress1;
         hitList[1] = fortress2;
+        // create enemies
+        //for (int i=0; i<row1.length; i++){
+
+        //}
+        //e1 = new Enemy(width/2 + 2*unit, height/3);
+        //e2 = new Enemy(width/2 - 4*unit, height/3);
 
         //SET UP TOUCH LISTENER
         setOnTouchListener(new OnTouchListener() {
@@ -120,6 +130,18 @@ public class Game1View extends View {
     @Override
     protected void onDraw(Canvas canvas){
         // DRAW STUFF
+        // ENEMIES
+        /*for (Enemy e: row1){
+            if (e.drawn){
+                e.draw(canvas,mPaint);
+            }
+
+        }*/
+        //e1.draw(canvas, mPaint);
+        //e2.draw(canvas, mPaint);
+
+
+
         // MANAGE BULLETS
         for(Bullet b: bullets){
             if (b.getY()<0){
