@@ -1,19 +1,19 @@
 package com.tvmcculloch.stress;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import java.util.LinkedList;
 
+import java.util.LinkedList;
 
 /**
  * Created by tedmcculloch on 4/15/18.
@@ -26,6 +26,8 @@ public class Game1View extends View {
     private Fortress fortress2;
     private int score = 0;
     private LinkedList<Bullet> bullets = new LinkedList<>();
+    private LinkedList<Bullet> eBullets = new LinkedList<>();
+
     private LinkedList<Bullet> removeB = new LinkedList<>();
     public static int height = getScreenHeight();
     public static int width = getScreenWidth();
@@ -34,10 +36,12 @@ public class Game1View extends View {
     public static long startTime;
     public static boolean move = false;
     public static Fortress[] hitList = new Fortress[2]; // stores fortresses
-    public static Enemy[] row1 = new Enemy[4];
-    public static Enemy e1;
-    public static Enemy e2;
-    public static Enemy e3;
+
+    private static UFO enemy;
+    public static long time_1 = System.currentTimeMillis();
+    public static long time_2 = System.currentTimeMillis();//
+    public static boolean dir = true;
+    public int hardness = SettingsActivity.hardness;
 
 
 
@@ -67,8 +71,10 @@ public class Game1View extends View {
         init();
     }
 
-    // Initializes values and game levels
+
     private void init(){
+        //Log.d("screen Width",Float.toString(width));
+        //Log.d("screen height",Float.toString(height));
         mPaint = new Paint();
         you = new You(width/2, height-7*unit);
         fortress1 = new Fortress(width/2 + 2*unit,height/2);
@@ -76,11 +82,9 @@ public class Game1View extends View {
         hitList[0] = fortress1;
         hitList[1] = fortress2;
         // create enemies
-        //for (int i=0; i<row1.length; i++){
+        enemy = new UFO(width/2,height/10);
+        enemy.drawn = true;
 
-        //}
-        //e1 = new Enemy(width/2 + 2*unit, height/3);
-        //e2 = new Enemy(width/2 - 4*unit, height/3);
 
         //SET UP TOUCH LISTENER
         setOnTouchListener(new OnTouchListener() {
@@ -129,20 +133,58 @@ public class Game1View extends View {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onDraw(Canvas canvas){
+        // UFO: BULLET CREATION
+        if( System.currentTimeMillis()-time_1 >= 2000 && enemy.drawn){
+            // fire
+            eBullets.add(new Bullet(enemy.getX(), enemy.getY()));
+            time_1 = System.currentTimeMillis();
+
+
+        }
+        else if(System.currentTimeMillis()-time_2 >= 3000 && enemy.drawn){
+            eBullets.add(new Bullet(enemy.getX(), enemy.getY()));
+            time_2 = System.currentTimeMillis();
+            dir = !dir; // change direction
+
+        }
         // DRAW STUFF
-        // ENEMIES
-        /*for (Enemy e: row1){
-            if (e.drawn){
-                e.draw(canvas,mPaint);
+
+
+
+
+        // MANGE ENEMY BULLETS
+        for(Bullet b: eBullets){
+            if(b.getY()>=height-2*unit){
+                removeB.add(b);
+            }
+            else if(you.isHit(b.getX(),b.getY(),b)){
+                removeB.add(b);
+            }
+            else if(fortress1.isHit(b.getX(), b.getY()) && fortress1.drawn){
+                removeB.add(b);
+            }
+            else if(fortress2.isHit(b.getX(), b.getY()) && fortress2.drawn){
+                removeB.add(b);
+            }
+            else{
+                b.fireDown();
+                b.draw(canvas,mPaint);
             }
 
-        }*/
-        //e1.draw(canvas, mPaint);
-        //e2.draw(canvas, mPaint);
+        }
 
+        // draw UFO
+        if(enemy.drawn){
+            if(dir){
+                enemy.moveRight();
+            }
+            else{
+                enemy.moveLeft();
+            }
+            enemy.draw(canvas,mPaint);
+        }
 
-
-        // MANAGE BULLETS
+        // YOUR MANAGE BULLETS
         for(Bullet b: bullets){
             if (b.getY()<0){
                 removeB.add(b);
@@ -151,6 +193,9 @@ public class Game1View extends View {
                 removeB.add(b);
             }
             else if(fortress2.isHit(b.getX(), b.getY()) && fortress2.drawn){
+                removeB.add(b);
+            }
+            else if(enemy.isHit(b.getX(), b.getY()) && enemy.drawn){
                 removeB.add(b);
             }
             else{
@@ -163,7 +208,7 @@ public class Game1View extends View {
             bullets.remove(b);
         }
         removeB.clear();
-
+        you.draw(canvas, mPaint);
         // move paddle
         if (move){
             float newX = you.getNewX();
@@ -199,9 +244,21 @@ public class Game1View extends View {
         }
 
 
-
-
         postInvalidateOnAnimation();
+        // end game conditions
+        Log.d("HC", Integer.toString(you.getHitCount()));
+        if(you.getHitCount()/25>=15){
+            gameOver();
+        }
+
+
+
+
+    }
+
+    private void gameOver(){
+        Intent newIntent = new Intent(this.getContext(), Replay.class);
+        this.getContext().startActivity(newIntent);
     }
 
 

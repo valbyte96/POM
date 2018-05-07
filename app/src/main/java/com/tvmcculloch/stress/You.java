@@ -3,6 +3,7 @@ package com.tvmcculloch.stress;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 /**
  * Created by tedmcculloch on 4/15/18.
@@ -14,7 +15,7 @@ public class You {
     private float unit;
     private int color;
     private float newX;
-
+    private int hitCount = 0;
     // constructor
     public You(float x, float y ){
         this.x = x;
@@ -46,9 +47,23 @@ public class You {
     }
 
     public void draw(Canvas canvas, Paint paint){
+
+        if(hitCount<7){
+            this.color = Color.GREEN;
+        }
+        else if(hitCount>=7 && hitCount<=12){
+            this.color = Color.YELLOW;
+        }
+        else{
+            this.color = Color.RED;
+        }
         paint.setColor(this.color);
-        canvas.drawRect(x+unit*3/2,y,x-unit*3/2,y+unit,paint);
-        canvas.drawRect(x-unit/2, y, x+unit/2, y-unit/2, paint);
+
+
+        canvas.drawRect(x-unit*3/2,y,x+unit*3/2,y+unit,paint);
+        canvas.drawRect(x-unit/2, y-unit/2, x+unit/2, y, paint);
+
+
 
     }
     public float getX(){
@@ -56,6 +71,19 @@ public class You {
     }
     public float getY(){
         return this.y;
+    }
+
+    public boolean isHit(float x, float y, Bullet b){
+        if(x>=this.x-3/2*unit && x<=this.x+3/2*unit && y>=this.y && y<=this.y+unit && b.getActive()){
+            b.setActive();
+            this.hitCount+=1;
+            return true;
+        }
+
+        return false;
+    }
+    public int getHitCount(){
+        return this.hitCount;
     }
 
 

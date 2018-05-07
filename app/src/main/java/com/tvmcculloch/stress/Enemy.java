@@ -34,6 +34,11 @@ public class Enemy {
 
     }
 
+    public boolean isHit(float x, float y){
+
+        return false;
+    }
+
 
 }
 

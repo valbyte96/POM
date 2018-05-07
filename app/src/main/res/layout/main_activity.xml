@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/break1" />
+
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="0.03"
+        android:gravity="center"
+        android:layout_below="@+id/imageView"
+        android:text="The Game That Never Gets Harder"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/game1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+
+        android:background="@color/blue"
+        android:gravity="center"
+        android:text="BATTLE"
+        android:textColor="@color/black"
+        android:layout_marginLeft="67dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/subtitle"
+        android:layout_centerHorizontal="true"
+/>
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/game1"
+        android:layout_alignStart="@+id/game1"
+        android:layout_below="@+id/game1"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Settings"
+        android:textColor="@color/black" />
+
+
+</RelativeLayout>

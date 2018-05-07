@@ -14,6 +14,7 @@ public class Bullet {
     private int color = Color.WHITE;
     private float unit  = Game1View.unit;
     private int dy = 5;
+    private boolean active = true;
 
 
 
@@ -26,6 +27,10 @@ public class Bullet {
     public void center(float x, float y){
         this.x = x;
         this.y = y;
+    }
+
+    public void fireDown(){
+        this.y +=dy;
     }
 
     public void fire(){
@@ -43,6 +48,13 @@ public class Bullet {
         paint.setColor(this.color);
         canvas.drawRect(x-unit/4,y,x+unit/4,y+unit/2,paint);
 
+    }
+    public void setActive(){
+        this.color = Color.RED;
+        this.active = false;
+    }
+    public boolean getActive(){
+        return this.active;
     }
 
 }

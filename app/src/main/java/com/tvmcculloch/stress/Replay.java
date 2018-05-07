@@ -4,22 +4,25 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
+public class Replay extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.main_activity);
-
-        ((Button) findViewById(R.id.game1)).setOnClickListener(new View.OnClickListener(){
+        setContentView(R.layout.activity_replay);
+        ((Button) findViewById(R.id.reset)).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-            game1();
+                replay();
+            }
+        });
+
+        ((Button) findViewById(R.id.menu)).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                menu();
             }
         });
 
@@ -29,19 +32,18 @@ public class MainActivity extends AppCompatActivity {
                 settings();
             }
         });
-
     }
-    private void game1(){
-        Intent i = new Intent(this, Game1Activity.class);
-        i.putExtra("hardness", 5);
-        startActivity(i);
+
+    private void replay(){
+        startActivity(new Intent(this, Game1Activity.class));
+    }
+
+    private void menu(){
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     private void settings(){
         startActivity(new Intent(this, SettingsActivity.class));
     }
-
-
-
 
 }

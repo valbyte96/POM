@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="POM"
+        android:label="GameBreak"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -21,7 +21,12 @@
         <activity
             android:name=".Game1Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".GameOver"
+            android:label="@string/title_activity_game_over"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Replay"></activity>
     </application>
 
 </manifest>
