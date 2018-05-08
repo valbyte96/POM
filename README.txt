@@ -45,5 +45,16 @@ B) PHONE: Download on hard drive
    
 
 ---------
-COMMENTS
+CHECKLIST
 ---------
+1. includes readme
+2. commented
+3. appropriate names
+4. update history on git
+5. no functional errors
+6/7. logical errors fixed and addressed
+8. modular 
+9. efficient
+10. new skills: android dev, android life cycle, application memory, 
+application activity communication, etc. 
+
