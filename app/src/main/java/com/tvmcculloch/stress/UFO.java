@@ -7,16 +7,19 @@ import android.util.Log;
 
 /**
  * Created by tedmcculloch on 4/30/18.
+ * Class for UFO or enemy object
+ *
  */
 
 public class UFO {
     private static float cX;
     private static float cY;
-    private static float unit = Game1View.unit;
+    private static float unit = Game1View.unit; // screen unit
     public static boolean drawn = true;
     public static int hitCount;
-    public static boolean RIGHT = true;
-    public static int moves = 5;
+
+
+    // CONSTRUCTOR
     public UFO(float x, float y){
         this.cX = x;
         this.cY = y;
@@ -24,15 +27,19 @@ public class UFO {
 
     }
 
-    public void move(float nX){
-        this.cX = nX;
-    }
+
     public void moveRight(){
+        /* Moves UFO to the right
+         */
         this.cX+=unit/25;
     }
     public void moveLeft(){
+        /* Moves UFO to the right
+         */
         this.cX-=unit/25;
     }
+
+    // Getters: X & Y
     public float getX(){
         return cX;
     }
@@ -43,6 +50,7 @@ public class UFO {
 
 
     public boolean isHit(float x, float y){
+        /* Reports if instance of UFO has been hit by user bullets*/
         if(x>=cX-10/2*unit && x<=cX+10/2*unit && y>=cY+unit*2 && y<=cY+3*unit){
 
             hitCount+=1;
@@ -54,10 +62,9 @@ public class UFO {
 
 
     public void draw(Canvas canvas, Paint paint){
-        //Log.d("hit",Float.toString(hitCount));
-        if (hitCount==2){
-            this.drawn = false; // for testing
-        }
+        /* Draws UFO as well as changes color*/
+        Log.d("hit",Float.toString(hitCount));
+
         if(hitCount<5){
             paint.setColor(Color.RED);
         }
@@ -84,8 +91,6 @@ public class UFO {
         canvas.drawRect(cX-7/2*unit,cY+unit*3,cX+7/2*unit,cY+4*unit,paint); // bottom rectangle
         canvas.drawRect(cX-2*unit,cY+unit*4,cX-2*unit + unit/2,cY+5*unit,paint); // cannon 1
         canvas.drawRect(cX+2*unit - unit/2,cY+unit*4,cX+2*unit ,cY+5*unit,paint); // cannon 1
-        // canvas.drawRect(cX-5*unit,cY,cX+5*unit,cY+5*unit,paint);
-        //
 
     }
 

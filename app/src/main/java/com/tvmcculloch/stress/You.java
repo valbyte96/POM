@@ -7,6 +7,7 @@ import android.util.Log;
 
 /**
  * Created by tedmcculloch on 4/15/18.
+ * User class: allows user to move and fire bullets
  */
 
 public class You {
@@ -14,9 +15,10 @@ public class You {
     private float y;
     private float unit;
     private int color;
-    private float newX;
+    private float newX; // when a user taps on the screen this is the X coord of their tap
     private int hitCount = 0;
-    // constructor
+
+    // CONSTRUCTOR
     public You(float x, float y ){
         this.x = x;
         this.y = y;
@@ -24,34 +26,32 @@ public class You {
         this.color = Color.GREEN;
     }
 
-    // methods
+    // METHODS
 
     public void move(float x){
+        /* moves user*/
         this.x = x;
     }
 
     public void setNewX(float nX){
+        /* Sets new X*/
         this.newX = nX;
     }
     public float getNewX(){
+        /* Gets new X*/
         return this.newX;
     }
 
-    public void changeColor(){
-        if (this.color == Color.RED){
-            this.color=Color.GREEN;
-        }
-        else{
-            this.color = Color.RED;
-        }
-    }
+
 
     public void draw(Canvas canvas, Paint paint){
-
-        if(hitCount<7){
+        /*
+        * Draws user
+        * */
+        if(hitCount<6){
             this.color = Color.GREEN;
         }
-        else if(hitCount>=7 && hitCount<=12){
+        else if(hitCount>=6 && hitCount<=9){
             this.color = Color.YELLOW;
         }
         else{
@@ -67,14 +67,17 @@ public class You {
 
     }
     public float getX(){
+        /* Get current X of user*/
         return this.x;
     }
     public float getY(){
+        /* Get current Y of user*/
         return this.y;
     }
 
     public boolean isHit(float x, float y, Bullet b){
-        if(x>=this.x-3/2*unit && x<=this.x+3/2*unit && y>=this.y && y<=this.y+unit && b.getActive()){
+        /* Determines if user has been hit*/
+        if(x>=this.x-3/2*unit && x<=this.x+3/2*unit && y>=this.y && b.getActive()){
             b.setActive();
             this.hitCount+=1;
             return true;
@@ -83,6 +86,7 @@ public class You {
         return false;
     }
     public int getHitCount(){
+        /* Get the number of times user has been hit*/
         return this.hitCount;
     }
 

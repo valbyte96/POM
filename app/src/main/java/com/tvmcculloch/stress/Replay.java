@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
+/* Brings up a game over screen with three buttons:
+ * REPLAY - play the game again
+ * MENU - go to menu
+ * SETTINGS - adjust game settings
+ */
 public class Replay extends AppCompatActivity {
 
     @Override

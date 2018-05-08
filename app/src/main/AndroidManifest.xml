@@ -22,10 +22,6 @@
             android:name=".Game1Activity"
             android:screenOrientation="portrait" />
         <activity android:name=".SettingsActivity" />
-        <activity
-            android:name=".GameOver"
-            android:label="@string/title_activity_game_over"
-            android:theme="@style/AppTheme" />
         <activity android:name=".Replay"></activity>
     </application>
 

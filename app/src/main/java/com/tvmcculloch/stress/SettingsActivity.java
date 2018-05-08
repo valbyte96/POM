@@ -1,15 +1,20 @@
 package com.tvmcculloch.stress;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
+/* Adjusts game settings with difficulty bar
+ */
+
 public class SettingsActivity extends AppCompatActivity {
-    public SeekBar bar;
-    public static int hardness;
+    private SeekBar bar;
+    //private ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -21,21 +26,20 @@ public class SettingsActivity extends AppCompatActivity {
         bar = (SeekBar) findViewById(R.id.seekBar);
 
         //save preferences
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        int settings = prefs.getInt("SeekValue", 1);
-        hardness = settings;
-        if(settings!=1){
-            bar.setProgress(settings);
-        }
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("SeekValue", Context.MODE_PRIVATE);
+        bar.setProgress(pref.getInt("SeekValue",1));
 
 
     }
     @Override
     public void onBackPressed(){
-        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+        /* When back arrow is pressed, it records the state of the bar into global preferences
+         */
+        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("SeekValue", Context.MODE_PRIVATE).edit();
         editor.putInt("SeekValue", bar.getProgress());
-
         editor.commit();
+
+
         super.onBackPressed();
     }
 }

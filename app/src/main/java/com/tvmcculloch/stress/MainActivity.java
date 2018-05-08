@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     }
     private void game1(){
         Intent i = new Intent(this, Game1Activity.class);
-        i.putExtra("hardness", 5);
         startActivity(i);
     }
 
