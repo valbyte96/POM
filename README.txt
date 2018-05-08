@@ -26,12 +26,16 @@ make sure it is running. (You will know it is running if a virtual phone is open
 FURTHER INSTRUCTIONS FOR RUNNING ON DEVICES:
 
 A) EMULATOR: Create new device
-   > run and press create new device 
-   > I suggest you select Galaxy Nexus for the device
-   > keep defaults, click next and finish
-   > it will take a moment for the virtual device to open up
-   > it will open in a new window and you can use open and work 
-     the app by clicking on your computer screen 
+   > Go to : Tools > android > AVD Manager
+   > From AVD Manager select: + Create Virtual Device...
+   > This will open up a menu of many different types of applications. You can try my 
+     application on whatever device you want; However, I cannot guarantee it will work on
+     every device. 
+   > Here's a recommended emulator:
+	Category: Phone
+	Device: Galaxy Nexus (Size: 4.65", Resolution: 720x1280, density xhdpi)
+	System Image: Lollipop 22 x86 Android 5.1
+	> finish 
 
 B) PHONE: Download on hard drive
    > turn the developer mode on in phone settings
